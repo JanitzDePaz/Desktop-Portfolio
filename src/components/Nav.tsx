@@ -15,23 +15,32 @@ import { useState } from "react";
 
 
 export default function Nav(){
-        const [ventanaActiva, setVentanaActiva] = useState("");
+        const [ventanaActiva, setVentanaActiva] = useState<string[]>([]);
         let infoBotones = [
-        {icono: "./public/hotbar/Perfil.svg", alt:"Perfil", onclick: ()=> setVentanaActiva("Perfil")},
-        {icono: "./public/hotbar/Proyectos.svg", alt:"Proyectos", onclick: ()=> setVentanaActiva("Proyectos")},
-        {icono: "./public/hotbar/Contacto.svg", alt:"Contacto", onclick: ()=> setVentanaActiva("Contacto")},
-        {icono: "./public/hotbar/Configuracion.svg", alt:"Configuracion", onclick: ()=> setVentanaActiva("Configuracion")}
-]
+        {id: 1, icono: "./hotbar/Perfil.svg", alt:"Perfil"},
+        {id: 2, icono: "./hotbar/Proyectos.svg", alt:"Proyectos"},
+        {id: 3, icono: "./hotbar/Contacto.svg", alt:"Contacto"},
+        {id: 4, icono: "./hotbar/Configuracion.svg", alt:"Configuracion"}
+        ]
+
+        const abrirVentanas = (tipo: string) => {if(!ventanaActiva.includes(tipo)){
+            setVentanaActiva([...ventanaActiva, tipo])
+        }}
+        const cerrarVentanas = (ventana: number) => setVentanaActiva(ventanaActiva.filter((vacio, i) => i !== ventana))
     return(
         <nav className=" fixed bottom-[0] h-[8vh] w-screen flex flex-row bg-[rgba(181,255,237,0.95)] border-t-[3px] border-[rgba(255,255,255,0.8)]">
             {infoBotones.map((boton) => {
                 return (
-                    <CrearBotones icono={boton.icono} alt={boton.alt} onClick={boton.onclick}/>
+                    <CrearBotones key={boton.id} icono={boton.icono} alt={boton.alt} onClick={()=>abrirVentanas(boton.alt)}/>
                 )
             })}
-            {ventanaActiva && <Ventanas tipo={ventanaActiva} />}
-            
-            
+            {ventanaActiva.map((tipo, i)=> (
+                <Ventanas 
+                key={i}
+                tipo={tipo}
+                cerrar={() => cerrarVentanas(i)}
+                />
+            ))}
         </nav>
     )
 }
