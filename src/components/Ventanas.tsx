@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import Perfil from "../data/Perfil";
 
 type tipoVentana= {
     tipo: String,
@@ -50,13 +51,16 @@ export default function Ventanas({tipo, cerrar}: tipoVentana){
                     <img src={`/hotbar/${tipo}.svg`} alt="prueba" className="h-[70%] rounded-all place-self-center m-[5%]" />
                 </section>
                 <section className="w-[60%]">
-                    <h2 className="text-[1.5rem] text-center font-[kanit] text-[white]">{tipo}</h2>
+                    <h2 className="text-[1.5rem] text-center text-[white]">{tipo}</h2>
                 </section>
-                <section className="w-[20%]">
-                    <button onClick={cerrar}>X</button>
+                <section className="w-[20%] flex justify-end">
+                    <button className="w-[15%] place-self-center mr-[2%] bg-transparent border-transparent"><img src="/menuVentanas/btnPantallaCompleta.svg" alt="PantallaCompleta" className="w-[100%]" /></button>
+                    <button onClick={cerrar} className="w-[15%] place-self-center mr-[5%] bg-transparent border-transparent"><img src="/menuVentanas/btnCerrarVentana.svg" alt="BotonCierre" className="w-[100%]" /></button>
                 </section>
             </header>
-            <main className="bg-[rgba(255,255,255,0.5)] h-[94%] rounded-b-[20px] border-[2px] border-[rgba(133,247,222,1)]"></main>
+            <main className="bg-[rgba(255,255,255,0.5)] h-[94%] rounded-b-[20px] border-[2px] border-[rgba(133,247,222,1)]">
+                <Perfil />
+            </main>
         </div>
         </>
     )
