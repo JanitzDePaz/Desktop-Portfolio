@@ -6,5 +6,10 @@
   padding: 0px;
   margin:0px;
   box-sizing: border-box;
-  font-family: Kanit, Georgia, 'Times New Roman', Times, serif;
+  font-family:"Kanit", 'Courier New', Courier, monospace;
+}
+
+@font-face {
+  font-family: "Kanit";
+  src: url("../src/assets/fonts/Kanit-Light.ttf");
 }

@@ -8,37 +8,39 @@
 //         que yo elijo para que luego en el propio modulo de ventana estila una ventana con la información que yo quiera.
 
 
-import CrearBotones from "./HotbarBtn"
-import Ventanas from "./Ventanas"
+import CreateBtn from "./HotbarBtn"
+import Windows from "./Window"
 import { useState } from "react";
 
 
 
 export default function Nav(){
-        const [ventanaActiva, setVentanaActiva] = useState<string[]>([]);
-        let infoBotones = [
-        {id: 1, icono: "./hotbar/Perfil.svg", alt:"Perfil"},
-        {id: 2, icono: "./hotbar/Proyectos.svg", alt:"Proyectos"},
-        {id: 3, icono: "./hotbar/Contacto.svg", alt:"Contacto"},
-        {id: 4, icono: "./hotbar/Configuracion.svg", alt:"Configuracion"}
+        const [activeWindow, setActiveWindow] = useState<string[]>([]);
+        let btnInfo = [
+        {id: 1, icon: "./hotbar/Profile.svg", alt:"Profile"},
+        {id: 2, icon: "./hotbar/Projects.svg", alt:"Projects"},
+        {id: 3, icon: "./hotbar/Contact.svg", alt:"Contact"},
+        {id: 4, icon: "./hotbar/Configuration.svg", alt:"Configuration"}
         ]
 
-        const abrirVentanas = (tipo: string) => {if(!ventanaActiva.includes(tipo)){
-            setVentanaActiva([...ventanaActiva, tipo])
+        const openWindows = (type: string) => {if(!activeWindow.includes(type)){
+            setActiveWindow([...activeWindow, type])
         }}
-        const cerrarVentanas = (ventana: number) => setVentanaActiva(ventanaActiva.filter((vacio, i) => i !== ventana))
+
+        //revisar, funciona pero se cambia posiciones de las ventanas
+        const closeWindows = (window: number) => setActiveWindow(activeWindow.filter((unused, i) => i !== window))
     return(
-        <nav className=" fixed bottom-[0] h-[8vh] w-screen flex flex-row bg-[rgba(181,255,237,0.95)] border-t-[3px] border-[rgba(255,255,255,0.8)]">
-            {infoBotones.map((boton) => {
+        <nav className=" fixed bottom-[0] h-[8vh] w-screen flex flex-row bg-[rgba(50,66,71,1)] border-t-[2px] border-[#3270ad]">
+            {btnInfo.map((btn) => {
                 return (
-                    <CrearBotones key={boton.id} icono={boton.icono} alt={boton.alt} onClick={()=>abrirVentanas(boton.alt)}/>
+                    <CreateBtn key={btn.id} icon={btn.icon} alt={btn.alt} onClick={()=>openWindows(btn.alt)}/>
                 )
             })}
-            {ventanaActiva.map((tipo, i)=> (
-                <Ventanas 
+            {activeWindow.map((type, i)=> (
+                <Windows
                 key={i}
-                tipo={tipo}
-                cerrar={() => cerrarVentanas(i)}
+                type={type}
+                close={() => closeWindows(i)}
                 />
             ))}
         </nav>
