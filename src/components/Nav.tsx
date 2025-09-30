@@ -1,13 +1,3 @@
-//En este archivo se usan los modulos CrearBotones y Ventanas
-
-//CrearBotones: crea un boton con unos estilos y valores especificos que se modifican desde el array botones de este archivo.
-//              Añadiendo un objeto a este array con los datos necesarios creara un boton funcional que abrira una ventana.
-
-//Ventana: el modulo Ventana funciona mediante un useState que detecta si su valor cambia. Esto mediante un onClick en el 
-//         valor del boton hago que cambie el valor del useState y con ello hago que se ejecute el modulo de Ventana con el texto
-//         que yo elijo para que luego en el propio modulo de ventana estila una ventana con la información que yo quiera.
-
-
 import CreateBtn from "./HotbarBtn"
 import Windows from "./Window"
 import { useState } from "react";
